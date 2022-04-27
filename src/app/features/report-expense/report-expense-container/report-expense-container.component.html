@@ -1,5 +1,5 @@
 <div class="report-expanse-container-wrapper">
   <div class="report-expense-table-wrapper">
-    <app-data-table></app-data-table>
+    <app-data-table #dataTableComponent [columnDefs]="columnDefs" [dataSource]="reportsData"></app-data-table>
   </div>
 </div>
