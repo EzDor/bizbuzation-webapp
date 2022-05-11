@@ -1,0 +1,11 @@
+@import "src/styles/variabels";
+
+.spinner-container {
+	display: flex;
+  justify-content: center;
+  align-items: center;
+  height: $app-content-height;
+}
+
+.spinner {
+}

@@ -1,5 +1,8 @@
 <div class="report-expanse-container-wrapper">
   <div class="report-expense-table-wrapper">
-    <app-data-table #dataTableComponent [columnDefs]="columnDefs" [dataSource]="reportsData"></app-data-table>
+    <app-data-table *ngIf="!isLoading else spinner" #dataTableComponent [columnDefs]="columnDefs" [dataSource]="reportsData"></app-data-table>
   </div>
 </div>
+<ng-template #spinner>
+  <app-spinner></app-spinner>
+</ng-template>

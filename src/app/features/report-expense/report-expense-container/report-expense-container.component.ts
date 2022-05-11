@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { UnsubscribeSubject } from '@app/utils/unsubscribe-subject';
 import { ColumnDef } from '@models/app-data-table/columnDef';
 import { ReportExpenseItem } from '@models/report-expense/report-expense-item';
@@ -15,13 +15,14 @@ import { takeUntil } from 'rxjs/operators';
 	templateUrl: './report-expense-container.component.html',
 	styleUrls: ['./report-expense-container.component.scss'],
 })
-export class ReportExpenseContainerComponent implements OnInit {
+export class ReportExpenseContainerComponent implements OnInit, OnDestroy {
 	@ViewChild('dataTableComponent')
 	public dataTableComponent: DataTableComponent<ReportExpenseItem>;
 
 	public startDate: Date = new Date();
 	public endDate: Date = new Date();
 	public reportsData: ReportExpenseItem[] = [];
+	public isLoading: boolean = true;
 	public readonly columnDefs: ColumnDef<ReportExpenseItem>[] = [
 		{ header: 'Date', columnDef: 'date', cell: (report) => report.date.toDateString() },
 		{ header: 'Amount', columnDef: 'amount', cell: (report) => report.amount },
@@ -37,16 +38,17 @@ export class ReportExpenseContainerComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.store.dispatch(loadReportExpenses({ startDate: this.startDate, endDate: this.endDate }));
-    this.store
-			.pipe(select(selectAllReportExpense), takeUntil(this.unsubscribe$))
-			.subscribe((reports: ReportExpenseItem[]) => {
-        this.reportsData = reports
-        console.log("Im here");
-        console.log(reports);
-      });
+		this.store.pipe(select(selectAllReportExpense), takeUntil(this.unsubscribe$)).subscribe((reports: ReportExpenseItem[]) => {
+			this.reportsData = reports;
+			console.log('Im here');
+			console.log(reports);
+		});
+		this.store
+			.pipe(select(selectIsLoadingReportExpense), takeUntil(this.unsubscribe$))
+			.subscribe((isLoading) => (this.isLoading = isLoading));
 	}
 
-	get isLoading$(): Observable<boolean> {
-		return this.store.select(selectIsLoadingReportExpense);
+	ngOnDestroy(): void {
+		this.unsubscribe$.cleanup();
 	}
 }
