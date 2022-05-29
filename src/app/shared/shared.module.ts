@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -9,7 +10,7 @@ import { SvgIconComponent } from 'src/app/shared/svg-icon/svg-icon.component';
 import { DataTableComponent } from './data-table/data-table.component';
 import { SpinnerComponent } from './spinner/spinner.component';
 
-const materialComponents = [MatSidenavModule, MatIconModule, MatTableModule, MatSortModule, MatProgressSpinnerModule];
+const materialComponents = [MatSidenavModule, MatIconModule, MatTableModule, MatSortModule, MatProgressSpinnerModule, MatButtonModule];
 
 const declarations = [SvgIconComponent, DataTableComponent, SpinnerComponent];
 

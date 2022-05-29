@@ -32,15 +32,18 @@ export class DataTableComponent<T> implements OnInit {
 
   public displayedColumns: string[];
 
-  ngAfterContentInit() {
-    console.log(this.dataSource);
+  public ngAfterContentInit() {
     // this.columnDefs.forEach(columnDef => this.table.addColumnDef(columnDef));
     // this.rowDefs.forEach(rowDef => this.table.addRowDef(rowDef));
     // this.headerRowDefs.forEach(headerRowDef => this.table.addHeaderRowDef(headerRowDef));
     // this.table.setNoDataRow(this.noDataRow);
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.displayedColumns = this.columnDefs.map(col => col.columnDef);
+  }
+
+  public addButtonClicked(){
+    // print to console that clicked
   }
 }

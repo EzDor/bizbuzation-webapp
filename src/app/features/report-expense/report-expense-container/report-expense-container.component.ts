@@ -40,8 +40,6 @@ export class ReportExpenseContainerComponent implements OnInit, OnDestroy {
 		this.store.dispatch(loadReportExpenses({ startDate: this.startDate, endDate: this.endDate }));
 		this.store.pipe(select(selectAllReportExpense), takeUntil(this.unsubscribe$)).subscribe((reports: ReportExpenseItem[]) => {
 			this.reportsData = reports;
-			console.log('Im here');
-			console.log(reports);
 		});
 		this.store
 			.pipe(select(selectIsLoadingReportExpense), takeUntil(this.unsubscribe$))
