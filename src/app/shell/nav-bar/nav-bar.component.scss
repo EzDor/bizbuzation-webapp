@@ -1,12 +1,14 @@
 @import "src/styles/variabels";
 
-.app-nav-header {
+.app-nav-bar {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   height: $app-header-height;
+  display: flex;
+  align-items: center;
 }
 
 .nav-bar-icon-wrapper {
@@ -19,11 +21,20 @@
 }
 
 .app-main-text {
-  display: inline-block;
-  vertical-align: middle;
-  height: 100%;
+  margin-right: 30px;
 
   h1 {
     margin: 0;
   }
+}
+
+.nav-bar-buttons-wrapper{
+  width: 100%;
+  display: flex;
+  justify-items: flex-start;
+  justify-content: flex-start;
+}
+
+.nav-bar-button{
+  margin-right: 30px;
 }
