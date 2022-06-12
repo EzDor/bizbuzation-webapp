@@ -13,8 +13,9 @@
 	height: 10%;
   display: flex;
   align-items: center;
+  flex-direction: row-reverse 
 }
 
 .data-table-add-button {
-
+  margin-right: 15px;
 }

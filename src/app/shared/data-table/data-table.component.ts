@@ -45,5 +45,9 @@ export class DataTableComponent<T> implements OnInit {
 
   public addButtonClicked(){
     // print to console that clicked
+
+    console.log("Click me");
+
+
   }
 }
