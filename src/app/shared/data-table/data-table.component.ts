@@ -50,4 +50,18 @@ export class DataTableComponent<T> implements OnInit {
 
 
   }
+
+
+  ranges = [
+    {value: 'This Month', viewValue: 'This Month'},
+    {value: 'Previous Mons', viewValue: 'Previous Mons'},
+    {value: '2 Month Ago', viewValue: '2 Month Ago'},
+    {value: '3 Month Ago', viewValue: '3 Month Ago'},
+  ];
+
+  Accounts = [
+    {value: 'Account 1', viewValue: 'Account 1'},
+    {value: 'Account 2', viewValue: 'Account 2'},
+
+  ];
 }
