@@ -9,8 +9,9 @@ import { MatTableModule } from '@angular/material/table';
 import { SvgIconComponent } from 'src/app/shared/svg-icon/svg-icon.component';
 import { DataTableComponent } from './data-table/data-table.component';
 import { SpinnerComponent } from './spinner/spinner.component';
+import {MatSelectModule} from '@angular/material/select';
 
-const materialComponents = [MatSidenavModule, MatIconModule, MatTableModule, MatSortModule, MatProgressSpinnerModule, MatButtonModule];
+const materialComponents = [MatSidenavModule, MatIconModule, MatTableModule, MatSortModule, MatProgressSpinnerModule, MatButtonModule, MatSelectModule];
 
 const declarations = [SvgIconComponent, DataTableComponent, SpinnerComponent];
 
