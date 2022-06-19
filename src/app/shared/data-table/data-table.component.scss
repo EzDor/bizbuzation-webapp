@@ -13,9 +13,20 @@
 	height: 10%;
   display: flex;
   align-items: center;
-  flex-direction: row-reverse 
+  flex-direction: row-reverse
 }
 
 .data-table-add-button {
   margin-right: 15px;
+
+}
+
+
+.selects-container{
+  display: flex;
+  margin: 10px 20px;
+}
+
+.select-Account , .select-date{
+  flex-basis: 30%;
 }

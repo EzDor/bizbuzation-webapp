@@ -3,6 +3,8 @@
 		<button mat-raised-button class="data-table-add-button" color="primary" (click)="addButtonClicked()">Add</button>
 	</div>
 
+
+<div class="selects-container">
   <div class="select-date">
     <mat-form-field appearance="fill">
   <mat-label>Date Range</mat-label>
@@ -24,6 +26,8 @@
       </mat-select>
     </mat-form-field>
   </div>
+</div>
+
 
 	<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 data-table">
 		<ng-container *ngFor="let column of columnDefs" [matColumnDef]="column.columnDef">
@@ -39,4 +43,3 @@
 		<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 	</table>
 </div>
-`
