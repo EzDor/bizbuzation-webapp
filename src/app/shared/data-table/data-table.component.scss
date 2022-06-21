@@ -10,23 +10,33 @@
 }
 
 .data-table-header {
-	height: 10%;
+  height: 10%;
   display: flex;
   align-items: center;
-  flex-direction: row-reverse
+  // flex-direction: row-reverse;
 }
 
 .data-table-add-button {
   margin-right: 15px;
-
+  // margin-top: 160px;
 }
 
 
 .selects-container{
   display: flex;
-  margin: 10px 20px;
+  // flex-grow: 1;
+  --gap: 10rem;
+  --gp: 1.2rem
 }
 
-.select-Account , .select-date{
-  flex-basis: 30%;
+.selects-container > *{
+  margin-left: var(--gap)
+
+}
+
+.selects-container > *{
+  margin-top: var(--gp)
+}
+.add-but{
+  margin-left: auto;
 }

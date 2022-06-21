@@ -1,33 +1,35 @@
 <div class="data-table-wrapper">
 	<div class="data-table-header">
-		<button mat-raised-button class="data-table-add-button" color="primary" (click)="addButtonClicked()">Add</button>
-	</div>
 
 
-<div class="selects-container">
-  <div class="select-date">
-    <mat-form-field appearance="fill">
-  <mat-label>Date Range</mat-label>
-  <mat-select>
-    <mat-option *ngFor="let Date of ranges" [value]="Date.value">
-      {{Date.viewValue}}
+    <div class="selects-container">
+      <div class="select-select-date">
+        <mat-form-field standard="fill">
+          <mat-label>Date Range</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let date of Ranges" [value]="date.value">
+              {{date.viewValue}}
     </mat-option>
   </mat-select>
 </mat-form-field>
-  </div>
+</div>
 
-  <div class="select-Account">
-    <mat-form-field appearance="fill">
-      <mat-label>Account</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let Account of Accounts" [value]="Account.value">
-          {{Account.viewValue}}
+<div class="select-select-account">
+  <mat-form-field standard="fill">
+    <mat-label>Account</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let account of Accounts" [value]="account.value">
+        {{account.viewValue}}
         </mat-option>
       </mat-select>
     </mat-form-field>
   </div>
 </div>
 
+<div class="add-but">
+<button mat-raised-button class="data-table-add-button" color="primary" (click)="addButtonClicked()">Add</button>
+</div>
+  </div>
 
 	<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 data-table">
 		<ng-container *ngFor="let column of columnDefs" [matColumnDef]="column.columnDef">

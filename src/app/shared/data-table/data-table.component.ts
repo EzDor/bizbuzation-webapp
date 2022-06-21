@@ -32,6 +32,20 @@ export class DataTableComponent<T> implements OnInit {
 
   public displayedColumns: string[];
 
+  public Ranges = [
+    {value: 'This Month', viewValue: 'This Month'},
+    {value: 'Previous Mons', viewValue: 'Previous Mons'},
+    {value: '2 Month Ago', viewValue: '2 Month Ago'},
+    {value: '3 Month Ago', viewValue: '3 Month Ago'},
+  ];
+
+  public Accounts = [
+    {value: 'Account 1', viewValue: 'Account 1'},
+    {value: 'Account 2', viewValue: 'Account 2'},
+
+  ];
+
+
   public ngAfterContentInit() {
     // this.columnDefs.forEach(columnDef => this.table.addColumnDef(columnDef));
     // this.rowDefs.forEach(rowDef => this.table.addRowDef(rowDef));
@@ -50,18 +64,4 @@ export class DataTableComponent<T> implements OnInit {
 
 
   }
-
-
-  ranges = [
-    {value: 'This Month', viewValue: 'This Month'},
-    {value: 'Previous Mons', viewValue: 'Previous Mons'},
-    {value: '2 Month Ago', viewValue: '2 Month Ago'},
-    {value: '3 Month Ago', viewValue: '3 Month Ago'},
-  ];
-
-  Accounts = [
-    {value: 'Account 1', viewValue: 'Account 1'},
-    {value: 'Account 2', viewValue: 'Account 2'},
-
-  ];
 }
