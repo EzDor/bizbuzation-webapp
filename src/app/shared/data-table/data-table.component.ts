@@ -63,5 +63,5 @@ export class DataTableComponent<T> implements OnInit {
     console.log("Click me");
 
 
-  }
-} 
+  } 
+}
