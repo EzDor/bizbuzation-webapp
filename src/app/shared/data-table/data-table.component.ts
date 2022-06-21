@@ -64,4 +64,4 @@ export class DataTableComponent<T> implements OnInit {
 
 
   }
-}
+} 
