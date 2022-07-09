@@ -10,13 +10,15 @@ export const reportExpenseReducer = createReducer(
 		isLoading: true,
 	})),
 
-	on(ReportExpenseActions.loadReportExpensesSuccess, (state, action) =>
-		reportExpenseEntityAdapter.setAll(action.reportExpenseItems, {
+	on(ReportExpenseActions.loadReportExpensesSuccess, (state, action) => {
+		const accounts = [...new Set(action.reportExpenseItems.map((item) => item.account))];
+		return reportExpenseEntityAdapter.setAll(action.reportExpenseItems, {
 			...state,
 			isLoading: false,
 			error: null,
-		})
-	),
+			accounts,
+		});
+	}),
 
 	on(ReportExpenseActions.loadReportExpensesFailure, (state, action) => ({
 		...state,

@@ -38,8 +38,12 @@ export class DataTableComponent<T> implements OnInit {
 	public dataSource: T[];
 	@Input()
 	public selectDef1: SelectDef;
+  @Input()
+	public selectedIndex1: number;
 	@Input()
 	public selectDef2: SelectDef;
+  @Input()
+  public selectedIndex2: number;
 
 	@Output()
 	public selectAction1: EventEmitter<SelectItem> = new EventEmitter<SelectItem>();

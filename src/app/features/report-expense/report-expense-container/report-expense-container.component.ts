@@ -10,7 +10,11 @@ import { ReportExpenseDateRangeType } from '@models/report-expense/report-expens
 import { select, Store } from '@ngrx/store';
 import { DataTableComponent } from '@shared/data-table/data-table.component';
 import { loadReportExpenses } from '@store/report-expense-store/report-expense.actions';
-import { selectAllReportExpense, selectIsLoadingReportExpense } from '@store/report-expense-store/report-expense.selectors';
+import {
+	selectAccountsReportExpense,
+	selectAllReportExpense,
+	selectIsLoadingReportExpense,
+} from '@store/report-expense-store/report-expense.selectors';
 import { RootState } from '@store/root-state';
 import { takeUntil } from 'rxjs/operators';
 
@@ -30,27 +34,22 @@ export class ReportExpenseContainerComponent implements OnInit, OnDestroy {
 	public readonly columnDefs: ColumnDef<ReportExpenseItem>[] = ReportExpenseConstants.columnDefs;
 
 	public readonly dateSelectDef: SelectDef = ReportExpenseConstants.dateSelect;
-  public accountSelectDef: SelectDef = {
-    title: 'Account',
-    items: [
-      { value: 'all', displayName: 'All' },
-    ],
-  };
+	public accountSelectDef: SelectDef;
 
-  private reportsData: ReportExpenseItem[] = [];
+	private reportsData: ReportExpenseItem[] = [];
 	private unsubscribe$: UnsubscribeSubject = new UnsubscribeSubject();
+	private readonly allAccountsKey = 'all';
 
-	constructor(private store: Store<RootState>) {}
+	constructor(private store: Store<RootState>) {
+		this.accountSelectDef = {
+			title: 'Account',
+			items: [],
+		};
+	}
 
 	ngOnInit(): void {
 		this.store.dispatch(loadReportExpenses(DateUtils.getDateRangeByType(ReportExpenseDateRangeType.thisMonth)));
-		this.store.pipe(select(selectAllReportExpense), takeUntil(this.unsubscribe$)).subscribe((reports: ReportExpenseItem[]) => {
-			this.reportsData = reports;
-      this.displayedReportsData = reports;
-		});
-		this.store
-			.pipe(select(selectIsLoadingReportExpense), takeUntil(this.unsubscribe$))
-			.subscribe((isLoading) => (this.isLoading = isLoading));
+		this.subscribeStoreData();
 	}
 
 	ngOnDestroy(): void {
@@ -61,16 +60,34 @@ export class ReportExpenseContainerComponent implements OnInit, OnDestroy {
 		this.store.dispatch(loadReportExpenses(DateUtils.getDateRangeByType(ReportExpenseDateRangeType[selectItem.value])));
 	}
 
-  public onAccountChange(selectItem: SelectItem): void {
-    if(selectItem.value === 'all') {
-      this.displayedReportsData = this.reportsData;
-    }else {
-      this.displayedReportsData = this.reportsData.filter((report) => report.account === selectItem.value);
-    }
+	public onAccountChange(selectItem: SelectItem): void {
+		const isFilterRequired: boolean = selectItem.value !== this.allAccountsKey;
+		if (isFilterRequired) {
+			this.displayedReportsData = this.reportsData.filter((report) => report.account === selectItem.value);
+		} else {
+			this.initTableData();
+		}
+	}
 
-  }
+	public initTableData() {
+		this.displayedReportsData = this.reportsData.map((report) => report);
+	}
 
-  private initAccounts(): void {
+	private initAccounts(accounts: string[]): void {
+		const accountsForSelect: SelectItem[] = accounts.map((account) => ({ value: account, displayName: account }));
+		this.accountSelectDef.items = [{ value: this.allAccountsKey, displayName: 'All' }, ...accountsForSelect];
+	}
 
-  }
+	private subscribeStoreData() {
+		this.store.pipe(select(selectAllReportExpense), takeUntil(this.unsubscribe$)).subscribe((reports: ReportExpenseItem[]) => {
+			this.reportsData = reports;
+			this.initTableData();
+		});
+		this.store
+			.pipe(select(selectIsLoadingReportExpense), takeUntil(this.unsubscribe$))
+			.subscribe((isLoading) => (this.isLoading = isLoading));
+		this.store.pipe(select(selectAccountsReportExpense), takeUntil(this.unsubscribe$)).subscribe((accounts: string[]) => {
+			this.initAccounts(accounts);
+		});
+	}
 }

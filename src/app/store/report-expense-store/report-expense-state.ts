@@ -8,6 +8,7 @@ export interface ReportExpenseState extends EntityState<ReportExpenseItem> {
 	isLoading: boolean;
 	error: string | null;
 	selectedItemId: number | null;
+  accounts: string[];
 }
 
 export interface ReportExpenseRootState extends RootState{
@@ -31,4 +32,5 @@ export const reportExpenseInitialState: ReportExpenseState = reportExpenseEntity
 	isLoading: true,
 	error: null,
 	selectedItemId: null,
+  accounts: []
 });

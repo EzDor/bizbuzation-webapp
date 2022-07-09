@@ -13,4 +13,6 @@ export const selectReportExpenseState = createFeatureSelector<ReportExpenseState
 
 export const selectIsLoadingReportExpense = createSelector(selectReportExpenseState, (state: ReportExpenseState) => state.isLoading);
 
+export const selectAccountsReportExpense = createSelector(selectReportExpenseState, (state: ReportExpenseState) => state.accounts);
+
 export const selectAllReportExpense = createSelector(selectReportExpenseState, selectAll);
