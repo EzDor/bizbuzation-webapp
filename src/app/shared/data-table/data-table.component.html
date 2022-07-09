@@ -1,7 +1,31 @@
 <div class="data-table-wrapper">
 	<div class="data-table-header">
-		<button mat-raised-button class="data-table-add-button" color="primary" (click)="addButtonClicked()">Add</button>
+		<div class="select select-date">
+			<mat-form-field appearance="standard">
+				<mat-label>Date Range</mat-label>
+				<mat-select value="This Month">
+					<mat-option *ngFor="let date of ranges" [value]="date.value">
+						{{ date.viewValue }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+
+		<div class="select select-account">
+			<mat-form-field appearance="standard">
+				<mat-label>Account</mat-label>
+				<mat-select value="Account 1">
+					<mat-option *ngFor="let account of accounts" [value]="account.value">
+						{{ account.viewValue }}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+
+		<div class="add-but"></div>
+		<button mat-fab class="data-table-add-button" color="primary" (click)="addButtonClicked()">+</button>
 	</div>
+
 	<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 data-table">
 		<ng-container *ngFor="let column of columnDefs" [matColumnDef]="column.columnDef">
 			<th mat-header-cell *matHeaderCellDef>
