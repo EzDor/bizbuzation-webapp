@@ -1,4 +1,4 @@
-import { ReportExpenseItem } from '@models/report-expense/report-expense-item';
+import { ReportExpenseItem } from '@models/api-forms/report-expense-item';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { RootState } from "@store/root-state";
 

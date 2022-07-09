@@ -1,8 +1,17 @@
 <div class="report-expanse-container-wrapper">
-  <div class="report-expense-table-wrapper">
-    <app-data-table *ngIf="!isLoading else spinner" #dataTableComponent [columnDefs]="columnDefs" [dataSource]="reportsData"></app-data-table>
-  </div>
+	<div class="report-expense-table-wrapper">
+		<app-data-table
+			*ngIf="!isLoading; else spinner"
+			#dataTableComponent
+			[columnDefs]="columnDefs"
+			[dataSource]="displayedReportsData"
+      [selectDef1]="dateSelectDef"
+      [selectDef2]="accountSelectDef"
+      (selectAction1)="onDateChange($event)"
+      (selectAction2)="onAccountChange($event)"
+		></app-data-table>
+	</div>
 </div>
 <ng-template #spinner>
-  <app-spinner></app-spinner>
+	<app-spinner></app-spinner>
 </ng-template>

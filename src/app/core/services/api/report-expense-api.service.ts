@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CoreModule } from '@core/core.module';
-import { ReportExpenseItem } from '@models/report-expense/report-expense-item';
+import { DateRange } from '@models/api-forms/date-range';
+import { ReportExpenseItem } from '@models/api-forms/report-expense-item';
 import { ApiService } from '@services/api/api.service';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
@@ -11,7 +12,7 @@ import { delay } from 'rxjs/operators';
 export class ReportExpenseApiService {
 	constructor(private apiService: ApiService) {}
 
-	public getReportExpenseData(startDate: Date, endDate: Date): Observable<ReportExpenseItem[]> {
+	public getReportExpenseData(dateRange: DateRange): Observable<ReportExpenseItem[]> {
 		const response: ReportExpenseItem[] = [];
 		for (let i = 0; i < 15; i++) {
 			response.push({

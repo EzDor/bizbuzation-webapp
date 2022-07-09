@@ -1,7 +1,8 @@
-import { ReportExpenseItem } from '@models/report-expense/report-expense-item';
+import { DateRange } from '@models/api-forms/date-range';
+import { ReportExpenseItem } from '@models/api-forms/report-expense-item';
 import { createAction, props } from '@ngrx/store';
 
-export const loadReportExpenses = createAction('[ReportExpense] Load ReportExpenses', props<{ startDate: Date; endDate: Date }>());
+export const loadReportExpenses = createAction('[ReportExpense] Load ReportExpenses', props<DateRange>());
 
 export const loadReportExpensesSuccess = createAction(
 	'[ReportExpense] Load ReportExpenses Success',

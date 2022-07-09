@@ -13,3 +13,9 @@ body {
 		background-color: rgba(255, 255, 255, 0.1) !important;
 	}
 }
+
+.select-form-field-no-margin {
+  .mat-form-field-wrapper{
+    padding-bottom: 0;
+  }
+}
