@@ -38,21 +38,18 @@ export class DataTableComponent<T> implements OnInit {
 	public dataSource: T[];
 	@Input()
 	public selectDef1: SelectDef;
-  @Input()
+	@Input()
 	public selectedIndex1: number;
 	@Input()
 	public selectDef2: SelectDef;
-  @Input()
-  public selectedIndex2: number;
-
-	@Output()
-	public selectAction1: EventEmitter<SelectItem> = new EventEmitter<SelectItem>();
-	@Output()
-	public selectAction2: EventEmitter<SelectItem> = new EventEmitter<SelectItem>();
+	@Input()
+	public selectedIndex2: number;
+	@Input()
+	public selectControl1: FormControl;
+	@Input()
+	public selectControl2: FormControl;
 
 	public displayedColumns: string[];
-	public selectControl1: FormControl;
-	public selectControl2: FormControl;
 
 	private unsubscribe$: UnsubscribeSubject = new UnsubscribeSubject();
 
@@ -65,7 +62,6 @@ export class DataTableComponent<T> implements OnInit {
 
 	public ngOnInit(): void {
 		this.displayedColumns = this.columnDefs.map((col) => col.columnDef);
-		this.initSelectControls();
 	}
 
 	get showSelect1(): boolean {
@@ -74,21 +70,6 @@ export class DataTableComponent<T> implements OnInit {
 
 	get showSelect2(): boolean {
 		return !!this.selectDef2;
-	}
-
-	private initSelectControls() {
-		if (this.showSelect1) {
-			this.selectControl1 = new FormControl(this.selectDef1.items[0]?.value || '', [Validators.required]);
-			this.selectControl1.valueChanges.pipe(takeUntil(this.unsubscribe$)).subscribe((value) => {
-				this.selectAction1.emit(this.selectDef1.items.find((item) => item.value === value));
-			});
-		}
-		if (this.showSelect2) {
-			this.selectControl2 = new FormControl(this.selectDef2.items[0]?.value || '', [Validators.required]);
-			this.selectControl2.valueChanges.pipe(takeUntil(this.unsubscribe$)).subscribe((value) => {
-				this.selectAction2.emit(this.selectDef2.items.find((item) => item.value === value));
-			});
-		}
 	}
 
 	public addButtonClicked() {

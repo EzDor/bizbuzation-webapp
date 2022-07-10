@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { DateUtils } from '@app/utils/date-utils';
 import { UnsubscribeSubject } from '@app/utils/unsubscribe-subject';
 import { ReportExpenseItem } from '@models/api-forms/report-expense-item';
@@ -35,6 +36,8 @@ export class ReportExpenseContainerComponent implements OnInit, OnDestroy {
 
 	public readonly dateSelectDef: SelectDef = ReportExpenseConstants.dateSelect;
 	public accountSelectDef: SelectDef;
+	public dateSelectControl: FormControl;
+	public accountSelectControl: FormControl;
 
 	private reportsData: ReportExpenseItem[] = [];
 	private unsubscribe$: UnsubscribeSubject = new UnsubscribeSubject();
@@ -43,13 +46,21 @@ export class ReportExpenseContainerComponent implements OnInit, OnDestroy {
 	constructor(private store: Store<RootState>) {
 		this.accountSelectDef = {
 			title: 'Account',
-			items: [],
+			items: [{ value: this.allAccountsKey, displayName: 'All' }],
 		};
+		this.dateSelectControl = new FormControl(this.dateSelectDef.items[0].value, Validators.required);
+		this.accountSelectControl = new FormControl(this.accountSelectDef.items[0].value, Validators.required);
 	}
 
 	ngOnInit(): void {
 		this.store.dispatch(loadReportExpenses(DateUtils.getDateRangeByType(ReportExpenseDateRangeType.thisMonth)));
 		this.subscribeStoreData();
+		this.dateSelectControl.valueChanges.pipe(takeUntil(this.unsubscribe$)).subscribe((value) => {
+			this.onDateChange(value);
+		});
+		this.accountSelectControl.valueChanges.pipe(takeUntil(this.unsubscribe$)).subscribe((value) => {
+			this.onAccountChange(value);
+		});
 	}
 
 	ngOnDestroy(): void {
@@ -60,17 +71,17 @@ export class ReportExpenseContainerComponent implements OnInit, OnDestroy {
 		this.store.dispatch(loadReportExpenses(DateUtils.getDateRangeByType(ReportExpenseDateRangeType[selectItem.value])));
 	}
 
-	public onAccountChange(selectItem: SelectItem): void {
-		const isFilterRequired: boolean = selectItem.value !== this.allAccountsKey;
+	public onAccountChange(account: string): void {
+		const isFilterRequired: boolean = account !== this.allAccountsKey;
 		if (isFilterRequired) {
-			this.displayedReportsData = this.reportsData.filter((report) => report.account === selectItem.value);
+			this.displayedReportsData = this.reportsData.filter((report) => report.account === account);
 		} else {
-			this.initTableData();
+			this.displayedReportsData = this.reportsData.map((report) => report);
 		}
 	}
 
 	public initTableData() {
-		this.displayedReportsData = this.reportsData.map((report) => report);
+		this.onAccountChange(this.accountSelectControl.value);
 	}
 
 	private initAccounts(accounts: string[]): void {
