@@ -49,6 +49,9 @@ export class DataTableComponent<T> implements OnInit {
 	@Input()
 	public selectControl2: FormControl;
 
+	@Output()
+	public onAddButtonClick = new EventEmitter<void>();
+
 	public displayedColumns: string[];
 
 	private unsubscribe$: UnsubscribeSubject = new UnsubscribeSubject();
@@ -73,6 +76,6 @@ export class DataTableComponent<T> implements OnInit {
 	}
 
 	public addButtonClicked() {
-		console.log('Click me');
+		this.onAddButtonClick.emit();
 	}
 }
