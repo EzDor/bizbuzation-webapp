@@ -88,7 +88,7 @@ export class ReportExpenseContainerComponent implements OnInit, OnDestroy {
 
 	public addReportExpense(): void {
 		const dialogRef = this.dialog.open(ReportExpenseCreateOrEditDialogComponent, {
-			width: '250px',
+			width: '650px',
 			data: {},
 		});
 
