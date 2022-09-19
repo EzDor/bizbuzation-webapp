@@ -9,9 +9,10 @@ import { ReportExpenseContainerComponent } from './report-expense-container/repo
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { ReportExpenseEffects } from '@store/report-expense-store/report-expense.effects';
+import { ReportExpenseCreateOrEditDialogComponent } from './report-expense-create-or-edit-dialog/report-expense-create-or-edit-dialog.component';
 
 @NgModule({
-	declarations: [ReportExpenseContainerComponent],
+	declarations: [ReportExpenseContainerComponent, ReportExpenseCreateOrEditDialogComponent],
 	imports: [
 		CommonModule,
 		ReportExpenseRoutingModule,

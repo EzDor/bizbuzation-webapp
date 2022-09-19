@@ -1,23 +1,9 @@
-import { DataSource } from '@angular/cdk/collections';
-import {
-	AfterContentInit,
-	Component,
-	ContentChild,
-	ContentChildren,
-	EventEmitter,
-	Input,
-	OnInit,
-	Output,
-	QueryList,
-	ViewChild,
-} from '@angular/core';
-import { FormControl, Validator, Validators } from '@angular/forms';
-import { MatColumnDef, MatHeaderRowDef, MatNoDataRow, MatRowDef, MatTable } from '@angular/material/table';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatTable } from '@angular/material/table';
 import { UnsubscribeSubject } from '@app/utils/unsubscribe-subject';
 import { ColumnDef } from '@models/app-data-table/columnDef';
 import { SelectDef } from '@models/app-data-table/select-def';
-import { SelectItem } from '@models/app-data-table/select-item';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-data-table',

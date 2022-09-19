@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { DateUtils } from '@app/utils/date-utils';
 import { UnsubscribeSubject } from '@app/utils/unsubscribe-subject';
+import { ReportExpenseCreateOrEditDialogComponent } from '@features/report-expense/report-expense-create-or-edit-dialog/report-expense-create-or-edit-dialog.component';
 import { ReportExpenseItem } from '@models/api-forms/report-expense-item';
 import { ColumnDef } from '@models/app-data-table/columnDef';
 import { SelectDef } from '@models/app-data-table/select-def';
@@ -43,7 +45,7 @@ export class ReportExpenseContainerComponent implements OnInit, OnDestroy {
 	private unsubscribe$: UnsubscribeSubject = new UnsubscribeSubject();
 	private readonly allAccountsKey = 'all';
 
-	constructor(private store: Store<RootState>) {
+	constructor(private store: Store<RootState>, public dialog: MatDialog) {
 		this.accountSelectDef = {
 			title: 'Account',
 			items: [{ value: this.allAccountsKey, displayName: 'All' }],
@@ -80,8 +82,19 @@ export class ReportExpenseContainerComponent implements OnInit, OnDestroy {
 		}
 	}
 
-	public initTableData() {
+	public initTableData(): void {
 		this.onAccountChange(this.accountSelectControl.value);
+	}
+
+	public addReportExpense(): void {
+		const dialogRef = this.dialog.open(ReportExpenseCreateOrEditDialogComponent, {
+			width: '250px',
+			data: {},
+		});
+
+		dialogRef.afterClosed().subscribe((result) => {
+			console.log('The dialog was closed');
+		});
 	}
 
 	private initAccounts(accounts: string[]): void {

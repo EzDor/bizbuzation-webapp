@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from "@angular/material/dialog";
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -20,9 +21,10 @@ const materialComponents = [
 	MatProgressSpinnerModule,
 	MatButtonModule,
 	MatSelectModule,
+  MatDialogModule
 ];
 
-const angularComponents = [CommonModule, ReactiveFormsModule];
+const angularComponents = [CommonModule, ReactiveFormsModule, FormsModule];
 
 const declarations = [SvgIconComponent, DataTableComponent, SpinnerComponent];
 
