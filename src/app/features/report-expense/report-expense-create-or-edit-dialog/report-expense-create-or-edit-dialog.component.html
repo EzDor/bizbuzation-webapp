@@ -1,12 +1,57 @@
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+<h1 mat-dialog-title>Add Account {{data.name}}</h1>
 <div mat-dialog-content>
-  <p>What's your favorite animal?</p>
-  <mat-form-field appearance="fill">
-    <mat-label>Favorite Animal</mat-label>
-    <input matInput [(ngModel)]="data.animal">
+  <mat-form-field class="date-picker" appearance="outline">
+    <mat-label>Date</mat-label>
+    <input matInput [matDatepicker]="picker">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
+
+  <mat-form-field class="date-picker" appearance="outline">
+    <mat-label>Type</mat-label>
+    <input matInput [matDatepicker]="picker1">
+    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1></mat-datepicker>
+  </mat-form-field>
+
+
+  <mat-form-field appearance="outline">
+    <mat-label>Amount</mat-label>
+    <input matInput type="text">
+  </mat-form-field>
+
+
+
+  <mat-form-field appearance="outline" class="dialog-fields">
+    <mat-label>Subtype</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let opt of subtypes" [value]="opt.value">
+        {{opt.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="dialog-fields">
+    <mat-label>Account</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let account of accounts" [value]="account.value">
+        {{account.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Comment</mat-label>
+    <input matInput type="text">
+  </mat-form-field>
+
+
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+  <button class="btn material-symbols-outlined" mat-button (click)="onNoClick()" mat-fab color="primary">Close</button>
+  <button class="btn material-symbols-outlined" mat-button [mat-dialog-close]="data.animal" cdkFocusInitial mat-raised-button color="primary"
+    mat-fab>Done</button>
 </div>
+
