@@ -14,6 +14,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 const materialComponents = [
 	MatSidenavModule,
@@ -26,6 +28,8 @@ const materialComponents = [
 	MatDialogModule,
 	MatDatepickerModule,
 	MatInputModule,
+  MatNativeDateModule,
+
 ];
 
 const angularComponents = [CommonModule, ReactiveFormsModule, FormsModule];

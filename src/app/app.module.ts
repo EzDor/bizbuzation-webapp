@@ -8,9 +8,7 @@ import { ShellModule } from "src/app/shell/shell.module";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
-import {MatIconModule} from '@angular/material/icon';
+
 
 @NgModule({
   declarations: [
@@ -25,9 +23,7 @@ import {MatIconModule} from '@angular/material/icon';
     ShellModule,
     AppRoutingModule,
     RootStoreModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatIconModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
