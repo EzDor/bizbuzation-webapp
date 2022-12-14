@@ -8,11 +8,13 @@
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 
-  <mat-form-field class="mat-form-field date-picker" appearance="outline">
-    <mat-label>Select</mat-label>
-    <input matInput [matDatepicker]="picker1">
-    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-    <mat-datepicker #picker1></mat-datepicker>
+  <mat-form-field appearance="outline" class="mat-form-field ">
+    <mat-label>type</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let type of types" [value]="type.value">
+        {{type.viewValue}}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
 
 
@@ -49,7 +51,7 @@
 
 </div>
 <div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial mat-stroked-button color="Basic">Cancel</button>
   <button mat-button (click)="onNoClick()"  mat-raised-button color="primary">Done</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial mat-stroked-button color="primary">Cancel</button>
 </div>
 
