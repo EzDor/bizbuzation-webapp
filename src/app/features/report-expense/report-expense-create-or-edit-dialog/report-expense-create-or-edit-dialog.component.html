@@ -1,12 +1,57 @@
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
+<h1 mat-dialog-title> Report Expense</h1>
+
 <div mat-dialog-content>
-  <p>What's your favorite animal?</p>
-  <mat-form-field appearance="fill">
-    <mat-label>Favorite Animal</mat-label>
-    <input matInput [(ngModel)]="data.animal">
+  <mat-form-field class="mat-form-field  date-picker" appearance="outline">
+    <mat-label>Date</mat-label>
+    <input matInput [matDatepicker]="picker">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mat-form-field ">
+    <mat-label>type</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let type of types" [value]="type.value">
+        {{type.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+  <mat-form-field class="mat-form-field"  appearance="outline">
+    <mat-label>Amount</mat-label>
+    <input matInput type="text">
+  </mat-form-field>
+
+
+
+  <mat-form-field appearance="outline" class="mat-form-field ">
+    <mat-label>Subtype</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let subtype of subtypes" [value]="subtype.value">
+        {{subtype.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="mat-form-field">
+    <mat-label>Account</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let account of accounts" [value]="account.value">
+        {{account.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="mat-form-field" appearance="outline">
+    <mat-label>Comment</mat-label>
+    <input matInput type="text">
+  </mat-form-field>
+
+
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial mat-stroked-button color="Basic">Cancel</button>
+  <button mat-button (click)="onNoClick()"  mat-raised-button color="primary">Done</button>
 </div>
+

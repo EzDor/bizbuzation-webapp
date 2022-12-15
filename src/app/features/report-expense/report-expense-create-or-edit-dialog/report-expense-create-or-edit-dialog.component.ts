@@ -12,4 +12,24 @@ export class ReportExpenseCreateOrEditDialogComponent {
 	onNoClick(): void {
 		this.dialogRef.close();
 	}
-}
+
+  types = [
+    {value: 'One-1', viewValue: 'One'},
+    {value: 'Two-2', viewValue: 'Two'},
+    {value: 'Three-3', viewValue: 'Three'},
+  ];
+
+  subtypes = [
+    {value: 'One-1', viewValue: 'One'},
+    {value: 'Two-2', viewValue: 'Two'},
+    {value: 'Three-3', viewValue: 'Three'},
+  ];
+
+  accounts = [
+    {value: 'One-1', viewValue: 'First Account'},
+    {value: 'Two-2', viewValue: 'Second Account'},
+    {value: 'Three-3', viewValue: 'Third Account'},
+  ];
+};
+
+
