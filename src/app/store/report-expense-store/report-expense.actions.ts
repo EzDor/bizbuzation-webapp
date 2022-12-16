@@ -10,3 +10,15 @@ export const loadReportExpensesSuccess = createAction(
 );
 
 export const loadReportExpensesFailure = createAction('[ReportExpense] Load ReportExpenses Failure', props<{ error: any }>());
+
+export const createReportExpenses = createAction(
+	'[ReportExpense] Create ReportExpenses',
+	props<{ reportExpenseItem: ReportExpenseItem }>()
+);
+
+export const createReportExpensesSuccess = createAction(
+	'[ReportExpense] Create ReportExpenses Success',
+	props<{ reportExpenseItem: ReportExpenseItem }>()
+);
+
+export const createReportExpensesFailure = createAction('[ReportExpense] Load ReportExpenses Failure', props<{ error: any }>());

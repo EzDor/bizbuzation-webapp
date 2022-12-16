@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DateUtils } from '@app/utils/date-utils';
 import { UnsubscribeSubject } from '@app/utils/unsubscribe-subject';
 import { ReportExpenseCreateOrEditDialogComponent } from '@features/report-expense/report-expense-create-or-edit-dialog/report-expense-create-or-edit-dialog.component';
@@ -12,7 +12,7 @@ import { ReportExpenseConstants } from '@models/report-expense/report-expense-co
 import { ReportExpenseDateRangeType } from '@models/report-expense/report-expense-date-range-type';
 import { select, Store } from '@ngrx/store';
 import { DataTableComponent } from '@shared/data-table/data-table.component';
-import { loadReportExpenses } from '@store/report-expense-store/report-expense.actions';
+import { createReportExpenses, loadReportExpenses } from '@store/report-expense-store/report-expense.actions';
 import {
 	selectAccountsReportExpense,
 	selectAllReportExpense,
@@ -92,9 +92,18 @@ export class ReportExpenseContainerComponent implements OnInit, OnDestroy {
 			data: {},
 		});
 
-		dialogRef.afterClosed().subscribe((result) => {
-			console.log('The dialog was closed');
-		});
+		this.subscribeSubmitEvent(dialogRef);
+	}
+
+	private subscribeSubmitEvent(dialogRef: MatDialogRef<ReportExpenseCreateOrEditDialogComponent>) {
+		dialogRef
+			.afterClosed()
+			.pipe(takeUntil(this.unsubscribe$))
+			.subscribe((reportExpenseItem: ReportExpenseItem) => {
+				if (reportExpenseItem) {
+					this.store.dispatch(createReportExpenses({ reportExpenseItem }));
+				}
+			});
 	}
 
 	private initAccounts(accounts: string[]): void {

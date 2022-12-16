@@ -27,4 +27,8 @@ export class ReportExpenseApiService {
 		}
 		return of(response).pipe(delay(1000));
 	}
+
+  public createReportExpense(reportExpenseItem : ReportExpenseItem){
+    return of(reportExpenseItem)
+  }
 }

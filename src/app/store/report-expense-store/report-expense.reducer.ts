@@ -24,5 +24,16 @@ export const reportExpenseReducer = createReducer(
 		...state,
 		isLoading: false,
 		error: action.error,
-	}))
+	})),
+
+  on(ReportExpenseActions.createReportExpensesSuccess, (state, action) => {
+    return reportExpenseEntityAdapter.addOne(action.reportExpenseItem, {
+      ...state
+    })
+  }),
+
+  on(ReportExpenseActions.createReportExpensesFailure, (state, action) => ({
+    ...state,
+    error: action.error,
+  }))
 );
