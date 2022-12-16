@@ -5,21 +5,18 @@ import { Observable } from 'rxjs';
 import { ReportExpenseEffects } from './report-expense.effects';
 
 xdescribe('ReportExpenseEffects', () => {
-  let actions$: Observable<any>;
-  let effects: ReportExpenseEffects;
+	let actions$: Observable<any>;
+	let effects: ReportExpenseEffects;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [
-        ReportExpenseEffects,
-        provideMockActions(() => actions$)
-      ]
-    });
+	beforeEach(() => {
+		TestBed.configureTestingModule({
+			providers: [ReportExpenseEffects, provideMockActions(() => actions$)],
+		});
 
-    effects = TestBed.inject(ReportExpenseEffects);
-  });
+		effects = TestBed.inject(ReportExpenseEffects);
+	});
 
-  it('should be created', () => {
-    expect(effects).toBeTruthy();
-  });
+	it('should be created', () => {
+		expect(effects).toBeTruthy();
+	});
 });

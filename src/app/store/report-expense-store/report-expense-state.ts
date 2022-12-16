@@ -1,6 +1,6 @@
 import { ReportExpenseItem } from '@models/api-forms/report-expense-item';
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { RootState } from "@store/root-state";
+import { RootState } from '@store/root-state';
 
 export const reportExpenseFeatureKey = 'reportExpense';
 
@@ -8,11 +8,11 @@ export interface ReportExpenseState extends EntityState<ReportExpenseItem> {
 	isLoading: boolean;
 	error: string | null;
 	selectedItemId: number | null;
-  accounts: string[];
+	accounts: string[];
 }
 
-export interface ReportExpenseRootState extends RootState{
-  reportExpense: ReportExpenseState
+export interface ReportExpenseRootState extends RootState {
+	reportExpense: ReportExpenseState;
 }
 
 function selectReportId(reportExpenseItem: ReportExpenseItem): number {
@@ -32,5 +32,5 @@ export const reportExpenseInitialState: ReportExpenseState = reportExpenseEntity
 	isLoading: true,
 	error: null,
 	selectedItemId: null,
-  accounts: []
+	accounts: [],
 });

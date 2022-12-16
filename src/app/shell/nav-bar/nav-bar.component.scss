@@ -1,40 +1,40 @@
-@import "src/styles/variabels";
+@import 'src/styles/variabels';
 
 .app-nav-bar {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: $app-header-height;
-  display: flex;
-  align-items: center;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: $app-header-height;
+	display: flex;
+	align-items: center;
 }
 
 .nav-bar-icon-wrapper {
-  padding: 10px;
-  display: inline-block;
+	padding: 10px;
+	display: inline-block;
 }
 
 .nav-bar-icon {
-  width: 30px;
+	width: 30px;
 }
 
 .app-main-text {
-  margin-right: 30px;
+	margin-right: 30px;
 
-  h1 {
-    margin: 0;
-  }
+	h1 {
+		margin: 0;
+	}
 }
 
-.nav-bar-buttons-wrapper{
-  width: 100%;
-  display: flex;
-  justify-items: flex-start;
-  justify-content: flex-start;
+.nav-bar-buttons-wrapper {
+	width: 100%;
+	display: flex;
+	justify-items: flex-start;
+	justify-content: flex-start;
 }
 
-.nav-bar-button{
-  margin-right: 30px;
+.nav-bar-button {
+	margin-right: 30px;
 }
