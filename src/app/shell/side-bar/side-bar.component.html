@@ -1,3 +1,5 @@
 <div class="sidebar-wrapper">
-	<p>side-bar works!</p>
+	<div class="sidebar-link-wrapper" routerLinkActive="active" *ngFor="let menuItem of menuItems">
+		<a class="sidebar-link no-hover-effect" mat-button [disableRipple]="true" [routerLink]="menuItem.link">{{ menuItem.displayName }}</a>
+	</div>
 </div>

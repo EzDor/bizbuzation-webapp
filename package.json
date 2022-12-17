@@ -48,6 +48,6 @@
     "typescript": "~4.5.5"
   },
   "lint-staged": {
-    "*.{js,css,md}": "prettier --write"
+    "**/*": "prettier --write --ignore-unknown"
   }
 }
