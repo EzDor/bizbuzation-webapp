@@ -47,5 +47,3 @@ Thumbs.db
 
 # Angular
 .angular
-/.husky/.gitignore
-/.husky/pre-commit

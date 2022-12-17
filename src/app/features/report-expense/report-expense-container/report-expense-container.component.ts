@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DateUtils } from '@app/utils/date-utils';
@@ -8,6 +8,7 @@ import { ReportExpenseItem } from '@models/api-forms/report-expense-item';
 import { ColumnDef } from '@models/app-data-table/columnDef';
 import { SelectDef } from '@models/app-data-table/select-def';
 import { SelectItem } from '@models/app-data-table/select-item';
+import { ExpenseType } from '@models/expense-type';
 import { ReportExpenseConstants } from '@models/report-expense/report-expense-constants';
 import { ReportExpenseDateRangeType } from '@models/report-expense/report-expense-date-range-type';
 import { select, Store } from '@ngrx/store';
@@ -27,8 +28,10 @@ import { takeUntil } from 'rxjs/operators';
 	styleUrls: ['./report-expense-container.component.scss'],
 })
 export class ReportExpenseContainerComponent implements OnInit, OnDestroy {
-	@ViewChild('dataTableComponent')
-	public dataTableComponent: DataTableComponent<ReportExpenseItem>;
+	@Input()
+	public expenseType: ExpenseType;
+	// @ViewChild('dataTableComponent')
+	// public dataTableComponent: DataTableComponent<ReportExpenseItem>;
 
 	public startDate: Date = new Date();
 	public endDate: Date = new Date();

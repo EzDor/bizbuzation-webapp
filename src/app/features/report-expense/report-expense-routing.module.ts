@@ -1,12 +1,26 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ReportExpenseContainerComponent } from '@features/report-expense/report-expense-container/report-expense-container.component';
+import { ReportExpenseConstantContainerComponent } from '@features/report-expense/report-expense-constant-container/report-expense-constant-container.component';
+import { ReportExpenseDataContainerComponent } from '@features/report-expense/report-expense-data-container/report-expense-data-container.component';
+import { RoutePathConstant } from '@models/route-path-constant';
 
 const routes: Routes = [
 	{
 		path: '',
-		component: ReportExpenseContainerComponent,
-		children: [],
+		children: [
+			{
+				path: RoutePathConstant.REPORT_EXPENSE_DATA_ROUTE,
+				component: ReportExpenseDataContainerComponent,
+			},
+			{
+				path: RoutePathConstant.REPORT_EXPENSE_CONSTANT_ROUTE,
+				component: ReportExpenseConstantContainerComponent,
+			},
+			{
+				path: '**',
+				redirectTo: RoutePathConstant.REPORT_EXPENSE_DATA_ROUTE,
+			},
+		],
 	},
 ];
 

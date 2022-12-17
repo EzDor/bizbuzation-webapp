@@ -15,7 +15,12 @@ body {
 }
 
 .select-form-field-no-margin {
-  .mat-form-field-wrapper{
-    padding-bottom: 0;
-  }
+	.mat-form-field-wrapper {
+		padding-bottom: 0;
+	}
+}
+
+.no-hover-effect.mat-button .mat-button-focus-overlay {
+	opacity: 0;
+	background-color: transparent;
 }
