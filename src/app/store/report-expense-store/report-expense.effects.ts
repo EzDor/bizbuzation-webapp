@@ -14,7 +14,7 @@ export class ReportExpenseEffects {
 		return this.actions$.pipe(
 			ofType(ReportExpenseActions.loadReportExpenses),
 			concatMap((action) =>
-				this.reportExpenseApiService.getReportExpenseData({ startDate: action.startDate, endDate: action.endDate }).pipe(
+				this.reportExpenseApiService.getReportExpenseData(action.dateRange, action.expenseType).pipe(
 					map((reportExpenseItems: ReportExpenseItem[]) => ReportExpenseActions.loadReportExpensesSuccess({ reportExpenseItems })),
 					catchError((error) => of(ReportExpenseActions.loadReportExpensesFailure({ error })))
 				)
@@ -26,7 +26,7 @@ export class ReportExpenseEffects {
 		return this.actions$.pipe(
 			ofType(ReportExpenseActions.createReportExpenses),
 			concatMap((action) =>
-				this.reportExpenseApiService.createReportExpense(action.reportExpenseItem).pipe(
+				this.reportExpenseApiService.createReportExpense(action.reportExpenseItem, action.expenseType).pipe(
 					map((reportExpenseItem: ReportExpenseItem) => createReportExpensesSuccess({ reportExpenseItem })),
 					catchError((error) => of(ReportExpenseActions.createReportExpensesFailure({ error })))
 				)

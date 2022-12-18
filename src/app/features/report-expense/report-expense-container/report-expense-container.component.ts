@@ -12,7 +12,6 @@ import { ExpenseType } from '@models/expense-type';
 import { ReportExpenseConstants } from '@models/report-expense/report-expense-constants';
 import { ReportExpenseDateRangeType } from '@models/report-expense/report-expense-date-range-type';
 import { select, Store } from '@ngrx/store';
-import { DataTableComponent } from '@shared/data-table/data-table.component';
 import { createReportExpenses, loadReportExpenses } from '@store/report-expense-store/report-expense.actions';
 import {
 	selectAccountsReportExpense,
@@ -30,11 +29,7 @@ import { takeUntil } from 'rxjs/operators';
 export class ReportExpenseContainerComponent implements OnInit, OnDestroy {
 	@Input()
 	public expenseType: ExpenseType;
-	// @ViewChild('dataTableComponent')
-	// public dataTableComponent: DataTableComponent<ReportExpenseItem>;
 
-	public startDate: Date = new Date();
-	public endDate: Date = new Date();
 	public displayedReportsData: ReportExpenseItem[] = [];
 	public isLoading: boolean = true;
 	public readonly columnDefs: ColumnDef<ReportExpenseItem>[] = ReportExpenseConstants.columnDefs;
@@ -58,7 +53,8 @@ export class ReportExpenseContainerComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit(): void {
-		this.store.dispatch(loadReportExpenses(DateUtils.getDateRangeByType(ReportExpenseDateRangeType.thisMonth)));
+		const dateRange = DateUtils.getDateRangeByType(ReportExpenseDateRangeType.thisMonth);
+		this.store.dispatch(loadReportExpenses({ dateRange, expenseType: this.expenseType }));
 		this.subscribeStoreData();
 		this.dateSelectControl.valueChanges.pipe(takeUntil(this.unsubscribe$)).subscribe((value) => {
 			this.onDateChange(value);
@@ -73,7 +69,8 @@ export class ReportExpenseContainerComponent implements OnInit, OnDestroy {
 	}
 
 	public onDateChange(selectItem: SelectItem): void {
-		this.store.dispatch(loadReportExpenses(DateUtils.getDateRangeByType(ReportExpenseDateRangeType[selectItem.value])));
+		const dateRange = DateUtils.getDateRangeByType(ReportExpenseDateRangeType[selectItem.value]);
+		this.store.dispatch(loadReportExpenses({ dateRange, expenseType: this.expenseType }));
 	}
 
 	public onAccountChange(account: string): void {
@@ -104,7 +101,7 @@ export class ReportExpenseContainerComponent implements OnInit, OnDestroy {
 			.pipe(takeUntil(this.unsubscribe$))
 			.subscribe((reportExpenseItem: ReportExpenseItem) => {
 				if (reportExpenseItem) {
-					this.store.dispatch(createReportExpenses({ reportExpenseItem }));
+					this.store.dispatch(createReportExpenses({ reportExpenseItem, expenseType: this.expenseType }));
 				}
 			});
 	}

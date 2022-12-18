@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CoreModule } from '@core/core.module';
 import { DateRange } from '@models/api-forms/date-range';
 import { ReportExpenseItem } from '@models/api-forms/report-expense-item';
+import { ExpenseType } from '@models/expense-type';
 import { ApiService } from '@services/api/api.service';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
@@ -12,7 +13,7 @@ import { delay } from 'rxjs/operators';
 export class ReportExpenseApiService {
 	constructor(private apiService: ApiService) {}
 
-	public getReportExpenseData(dateRange: DateRange): Observable<ReportExpenseItem[]> {
+	public getReportExpenseData(dateRange: DateRange, expenseType: ExpenseType): Observable<ReportExpenseItem[]> {
 		const response: ReportExpenseItem[] = [];
 		for (let i = 0; i < 15; i++) {
 			response.push({
@@ -28,7 +29,7 @@ export class ReportExpenseApiService {
 		return of(response).pipe(delay(1000));
 	}
 
-	public createReportExpense(reportExpenseItem: ReportExpenseItem) {
+	public createReportExpense(reportExpenseItem: ReportExpenseItem, expenseType: ExpenseType) {
 		return of(reportExpenseItem);
 	}
 }
