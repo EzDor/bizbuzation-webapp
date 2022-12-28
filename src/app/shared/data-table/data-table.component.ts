@@ -65,7 +65,7 @@ export class DataTableComponent<T> implements OnInit {
 		this.onAddButtonClick.emit();
 	}
 
-rowClicked(row){
-  console.log(row);
-}
+public rowClicked(row) {
+		console.log(row);
+	}
 }
