@@ -1,3 +1,4 @@
+import { DataTableComponent } from '@shared/data-table/data-table.component';
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -97,6 +98,12 @@ export class ReportExpenseContainerComponent implements OnInit, OnDestroy {
 
 	public editReportExpense(reportExpenseItem: ReportExpenseItem): void {
 		console.log(reportExpenseItem);
+    const dialogRef = this.dialog.open(ReportExpenseCreateOrEditDialogComponent,{
+			width: '650px',
+			data: reportExpenseItem,
+		});
+
+		this.subscribeSubmitEvent(dialogRef);
 	}
 
 	private subscribeSubmitEvent(dialogRef: MatDialogRef<ReportExpenseCreateOrEditDialogComponent>) {
