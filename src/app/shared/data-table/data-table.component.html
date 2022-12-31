@@ -22,7 +22,7 @@
 			</mat-form-field>
 		</div>
 		<div class="fill-box"></div>
-		<button mat-fab class="data-table-add-button" color="primary" (click)="addButtonClicked()">+</button>
+		<button mat-fab class="data-table-add-button" color="primary" (click)="addButtonClick()">+</button>
 	</div>
 	<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 data-table">
 		<ng-container *ngFor="let column of columnDefs" [matColumnDef]="column.columnDef">
@@ -35,6 +35,6 @@
 		</ng-container>
 
 		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-		<tr mat-row *matRowDef="let row; columns: displayedColumns" (click) = "rowClicked(row)"></tr>
+		<tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="onRowClick(row)"></tr>
 	</table>
 </div>

@@ -23,7 +23,6 @@ export class ReportExpenseCreateOrEditDialogComponent {
 			subtype: new FormControl(reportExpenseData.subtype, [Validators.required]),
 			comment: new FormControl(reportExpenseData.comment),
 		});
-		this.reportExpenseForm.valueChanges.subscribe((data) => console.log(data));
 	}
 
 	public closeDialog() {

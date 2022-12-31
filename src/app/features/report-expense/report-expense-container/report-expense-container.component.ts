@@ -19,7 +19,7 @@ import {
 	selectIsLoadingReportExpense,
 } from '@store/report-expense-store/report-expense.selectors';
 import { RootState } from '@store/root-state';
-import { takeUntil } from 'rxjs/operators';
+import { take, takeUntil } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-report-expense-container',
@@ -95,10 +95,14 @@ export class ReportExpenseContainerComponent implements OnInit, OnDestroy {
 		this.subscribeSubmitEvent(dialogRef);
 	}
 
+	public editReportExpense(reportExpenseItem: ReportExpenseItem): void {
+		console.log(reportExpenseItem);
+	}
+
 	private subscribeSubmitEvent(dialogRef: MatDialogRef<ReportExpenseCreateOrEditDialogComponent>) {
 		dialogRef
 			.afterClosed()
-			.pipe(takeUntil(this.unsubscribe$))
+			.pipe(take(1))
 			.subscribe((reportExpenseItem: ReportExpenseItem) => {
 				if (reportExpenseItem) {
 					this.store.dispatch(createReportExpenses({ reportExpenseItem, expenseType: this.expenseType }));

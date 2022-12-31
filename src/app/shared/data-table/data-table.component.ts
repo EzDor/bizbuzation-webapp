@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { FormControl } from '@angular/forms';
 import { MatTable } from '@angular/material/table';
 import { UnsubscribeSubject } from '@app/utils/unsubscribe-subject';
+import { ReportExpenseItem } from '@models/api-forms/report-expense-item';
 import { ColumnDef } from '@models/app-data-table/columnDef';
 import { SelectDef } from '@models/app-data-table/select-def';
 
@@ -36,7 +37,10 @@ export class DataTableComponent<T> implements OnInit {
 	public selectControl2: FormControl;
 
 	@Output()
-	public onAddButtonClick = new EventEmitter<void>();
+	public onAddButtonClickEvent = new EventEmitter<void>();
+
+	@Output()
+	public onRowClickEvent = new EventEmitter<ReportExpenseItem>();
 
 	public displayedColumns: string[];
 
@@ -61,11 +65,11 @@ export class DataTableComponent<T> implements OnInit {
 		return !!this.selectDef2;
 	}
 
-	public addButtonClicked() {
-		this.onAddButtonClick.emit();
+	public addButtonClick() {
+		this.onAddButtonClickEvent.emit();
 	}
 
-  public rowClicked(row){
-    console.log(row);
-  }
+	public onRowClick(row) {
+		this.onRowClickEvent.emit(row);
+	}
 }
