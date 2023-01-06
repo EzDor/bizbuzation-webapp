@@ -35,5 +35,16 @@ export const reportExpenseReducer = createReducer(
 	on(ReportExpenseActions.createReportExpensesFailure, (state, action) => ({
 		...state,
 		error: action.error,
+	})),
+
+	on(ReportExpenseActions.editReportExpensesSuccess, (state, action) => {
+		return reportExpenseEntityAdapter.updateOne(action.update, {
+			...state,
+		});
+	}),
+
+	on(ReportExpenseActions.editReportExpensesFailure, (state, action) => ({
+		...state,
+		error: action.error,
 	}))
 );

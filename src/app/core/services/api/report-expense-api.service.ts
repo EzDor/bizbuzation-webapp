@@ -32,4 +32,8 @@ export class ReportExpenseApiService {
 	public createReportExpense(reportExpenseItem: ReportExpenseItem, expenseType: ExpenseType) {
 		return of(reportExpenseItem);
 	}
+
+	public editReportExpense(reportExpenseItem: ReportExpenseItem, expenseType: ExpenseType) {
+		return of(reportExpenseItem);
+	}
 }

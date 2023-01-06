@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { ReportExpenseApiService } from '@services/api/report-expense-api.service';
 import { catchError, map, concatMap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { createReportExpensesSuccess } from './report-expense.actions';
+import { createReportExpensesSuccess, editReportExpensesSuccess } from './report-expense.actions';
 
 import * as ReportExpenseActions from './report-expense.actions';
 
@@ -29,6 +29,24 @@ export class ReportExpenseEffects {
 				this.reportExpenseApiService.createReportExpense(action.reportExpenseItem, action.expenseType).pipe(
 					map((reportExpenseItem: ReportExpenseItem) => createReportExpensesSuccess({ reportExpenseItem })),
 					catchError((error) => of(ReportExpenseActions.createReportExpensesFailure({ error })))
+				)
+			)
+		);
+	});
+	editReportExpenses$ = createEffect(() => {
+		return this.actions$.pipe(
+			ofType(ReportExpenseActions.createReportExpenses),
+			concatMap((action) =>
+				this.reportExpenseApiService.createReportExpense(action.reportExpenseItem, action.expenseType).pipe(
+					map((reportExpenseItem: ReportExpenseItem) =>
+						editReportExpensesSuccess({
+							update: {
+								id: reportExpenseItem.id,
+								changes: reportExpenseItem,
+							},
+						})
+					),
+					catchError((error) => of(ReportExpenseActions.editReportExpensesFailure({ error })))
 				)
 			)
 		);

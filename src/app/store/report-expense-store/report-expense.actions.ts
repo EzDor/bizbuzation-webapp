@@ -1,6 +1,7 @@
 import { DateRange } from '@models/api-forms/date-range';
 import { ReportExpenseItem } from '@models/api-forms/report-expense-item';
 import { ExpenseType } from '@models/expense-type';
+import { Update } from '@ngrx/entity';
 import { createAction, props } from '@ngrx/store';
 
 export const loadReportExpenses = createAction(
@@ -25,4 +26,16 @@ export const createReportExpensesSuccess = createAction(
 	props<{ reportExpenseItem: ReportExpenseItem }>()
 );
 
-export const createReportExpensesFailure = createAction('[ReportExpense] Load ReportExpenses Failure', props<{ error: any }>());
+export const createReportExpensesFailure = createAction('[ReportExpense] Create ReportExpenses Failure', props<{ error: any }>());
+
+export const editReportExpenses = createAction(
+	'[ReportExpense] Edit ReportExpenses',
+	props<{ reportExpenseItem: ReportExpenseItem; expenseType: ExpenseType }>()
+);
+
+export const editReportExpensesSuccess = createAction(
+	'[ReportExpense] Edit ReportExpenses Success',
+	props<{ update: Update<ReportExpenseItem> }>()
+);
+
+export const editReportExpensesFailure = createAction('[ReportExpense] Edit ReportExpenses Failure', props<{ error: any }>());
