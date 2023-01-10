@@ -86,17 +86,20 @@ export class ReportExpenseContainerComponent implements OnInit, OnDestroy {
 		this.onAccountChange(this.accountSelectControl.value);
 	}
 
-	public addReportExpense(): void {
-		const dialogRef = this.dialog.open(ReportExpenseCreateOrEditDialogComponent, {
-			width: '650px',
-			data: {},
-		});
+	public addReportExpense(reportExpenseItem): void {
 
-		this.subscribeSubmitEvent(dialogRef);
+    console.log(reportExpenseItem);
+    const dialogRef = this.dialog.open(ReportExpenseCreateOrEditDialogComponent, {
+      width: '650px',
+      data: reportExpenseItem,
+    });
+
+    this.subscribeSubmitEvent(dialogRef);
+
 	}
 
 	public editReportExpense(reportExpenseItem: ReportExpenseItem): void {
-		console.log(reportExpenseItem);
+    this.addReportExpense(reportExpenseItem)
 	}
 
 	private subscribeSubmitEvent(dialogRef: MatDialogRef<ReportExpenseCreateOrEditDialogComponent>) {
